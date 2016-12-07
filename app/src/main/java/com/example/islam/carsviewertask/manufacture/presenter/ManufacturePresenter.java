@@ -33,11 +33,6 @@ public class ManufacturePresenter implements ManufacturerContract.Presenter {
 
 
     @Override
-    public void subscribe() {
-
-    }
-
-    @Override
     public void unsubscribe() {
         mSubscriptions.clear();
     }
@@ -66,7 +61,7 @@ public class ManufacturePresenter implements ManufacturerContract.Presenter {
                 .subscribe(
                         // onNext
                         carModel -> {
-                            mManufactureView.showManfuctures(carModel);
+                            mManufactureView.showManufactures(carModel);
                         }, // onError
                         exception -> {
                             mManufactureView.showErrorMessage(exception.getMessage());

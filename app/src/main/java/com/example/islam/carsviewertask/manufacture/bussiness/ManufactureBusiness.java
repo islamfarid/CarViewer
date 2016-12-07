@@ -19,7 +19,8 @@ public class ManufactureBusiness {
     public ManufactureBusiness(CarsViewerRepository carsRepository) {
         mCarsRepository = carsRepository;
     }
+
     public Observable<CarModel> loadMoreManufactures(int page, int pageSize, String waKey) {
-        return mCarsRepository.loadMoreManufactures(page,pageSize,waKey);
+        return mCarsRepository.loadMoreManufactures(page, pageSize, waKey);
     }
 }

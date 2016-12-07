@@ -18,7 +18,8 @@ public class BuiltDatesBusiness {
     public BuiltDatesBusiness(CarsViewerRepository carsRepository) {
         mCarsRepository = carsRepository;
     }
+
     public Observable<CarModel> getBuitDates(String manufacture, String mainType, String waKey) {
-        return mCarsRepository.getBuiltDates(manufacture,mainType,waKey);
+        return mCarsRepository.getBuiltDates(manufacture, mainType, waKey);
     }
 }

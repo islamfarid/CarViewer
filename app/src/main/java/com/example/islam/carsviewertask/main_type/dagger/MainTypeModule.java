@@ -1,7 +1,6 @@
 package com.example.islam.carsviewertask.main_type.dagger;
 
 
-
 import com.example.islam.carsviewertask.main_type.MainTypeContract;
 
 import dagger.Module;

@@ -16,7 +16,7 @@ import rx.subscriptions.CompositeSubscription;
  * Created by islam on 04/12/16.
  */
 
-public class BuiltDatesPresenter implements BuildDataContract.Presenter{
+public class BuiltDatesPresenter implements BuildDataContract.Presenter {
     @NonNull
     private BuildDataContract.View mBuiltDatesView;
     @NonNull
@@ -30,11 +30,6 @@ public class BuiltDatesPresenter implements BuildDataContract.Presenter{
         mSubscriptions = new CompositeSubscription();
     }
 
-
-    @Override
-    public void subscribe() {
-
-    }
 
     @Override
     public void unsubscribe() {

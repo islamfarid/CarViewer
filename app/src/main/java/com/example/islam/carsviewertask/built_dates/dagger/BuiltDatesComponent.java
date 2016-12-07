@@ -3,7 +3,6 @@ package com.example.islam.carsviewertask.built_dates.dagger;
 
 import com.example.islam.carsviewertask.built_dates.view.BuiltDatesViewGroup;
 import com.example.islam.carsviewertask.data.dagger.CarsViewersRepositoryComponent;
-import com.example.islam.carsviewertask.main_type.view.MainTypeActivity;
 import com.example.islam.carsviewertask.utils.FragmentScoped;
 
 import dagger.Component;

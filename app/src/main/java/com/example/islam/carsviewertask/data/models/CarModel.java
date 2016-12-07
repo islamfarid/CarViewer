@@ -13,6 +13,17 @@ import java.util.HashMap;
  */
 
 public class CarModel implements Parcelable {
+    public static final Parcelable.Creator<CarModel> CREATOR = new Parcelable.Creator<CarModel>() {
+        @Override
+        public CarModel createFromParcel(Parcel source) {
+            return new CarModel(source);
+        }
+
+        @Override
+        public CarModel[] newArray(int size) {
+            return new CarModel[size];
+        }
+    };
     @SerializedName("page")
     @Expose
     private int page;
@@ -24,7 +35,17 @@ public class CarModel implements Parcelable {
     private int totalPageCount;
     @SerializedName("wkda")
     @Expose
-    private HashMap<String,String> carData;
+    private HashMap<String, String> carData;
+
+    public CarModel() {
+    }
+
+    protected CarModel(Parcel in) {
+        this.page = in.readInt();
+        this.pageSize = in.readInt();
+        this.totalPageCount = in.readInt();
+        this.carData = (HashMap<String, String>) in.readSerializable();
+    }
 
     public int getPage() {
         return page;
@@ -70,26 +91,4 @@ public class CarModel implements Parcelable {
         dest.writeInt(this.totalPageCount);
         dest.writeSerializable(this.carData);
     }
-
-    public CarModel() {
-    }
-
-    protected CarModel(Parcel in) {
-        this.page = in.readInt();
-        this.pageSize = in.readInt();
-        this.totalPageCount = in.readInt();
-        this.carData = (HashMap<String, String>) in.readSerializable();
-    }
-
-    public static final Parcelable.Creator<CarModel> CREATOR = new Parcelable.Creator<CarModel>() {
-        @Override
-        public CarModel createFromParcel(Parcel source) {
-            return new CarModel(source);
-        }
-
-        @Override
-        public CarModel[] newArray(int size) {
-            return new CarModel[size];
-        }
-    };
 }

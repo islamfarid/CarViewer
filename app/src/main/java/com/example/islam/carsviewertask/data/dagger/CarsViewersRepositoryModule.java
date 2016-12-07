@@ -1,7 +1,6 @@
 package com.example.islam.carsviewertask.data.dagger;
 
 
-import com.example.islam.carsviewertask.data.CarsViewerDataSource;
 import com.example.islam.carsviewertask.data.CarsViewerRepository;
 import com.example.islam.carsviewertask.data.remote.CarsViewerRemoteViewerDataSource;
 import com.example.islam.carsviewertask.data.remote.Remote;

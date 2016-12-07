@@ -17,9 +17,10 @@ import butterknife.ButterKnife;
 /**
  * Created by islam on 10/09/16.
  */
-public class BuiltDatesAdapter extends RecyclerView.Adapter  {
+public class BuiltDatesAdapter extends RecyclerView.Adapter {
     Context context;
     private ArrayList<String> builtTypes;
+
     public BuiltDatesAdapter(Context context, ArrayList<String> builtTypes) {
         this.builtTypes = builtTypes;
         this.context = context;
@@ -44,8 +45,11 @@ public class BuiltDatesAdapter extends RecyclerView.Adapter  {
         return builtTypes.size();
     }
 
+    public void addNewManufatures(ArrayList<String> mManufactures) {
+        this.builtTypes.addAll(mManufactures);
+    }
 
-    class MainTypeItem extends RecyclerView.ViewHolder{
+    class MainTypeItem extends RecyclerView.ViewHolder {
         @Bind(R.id.built_types_year_textview)
         TextView yearTextView;
 
@@ -55,9 +59,5 @@ public class BuiltDatesAdapter extends RecyclerView.Adapter  {
         }
 
 
-    }
-
-    public void addNewManufatures(ArrayList<String> mManufactures){
-        this.builtTypes.addAll(mManufactures);
     }
 }

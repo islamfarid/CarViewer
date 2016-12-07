@@ -21,16 +21,16 @@ public class ServiceGenerator {
 
     public static <S> S createService(Class<S> serviceClass) {
 
-            httpClient.addInterceptor(chain -> {
-                Request original = chain.request();
+        httpClient.addInterceptor(chain -> {
+            Request original = chain.request();
 
-                Request.Builder requestBuilder = original.newBuilder()
-                        .header("Accept", "application/json")
-                        .method(original.method(), original.body());
+            Request.Builder requestBuilder = original.newBuilder()
+                    .header("Accept", "application/json")
+                    .method(original.method(), original.body());
 
-                Request request = requestBuilder.build();
-                return chain.proceed(request);
-            });
+            Request request = requestBuilder.build();
+            return chain.proceed(request);
+        });
 
         OkHttpClient client = httpClient.build();
         Retrofit retrofit = builder.client(client).build();

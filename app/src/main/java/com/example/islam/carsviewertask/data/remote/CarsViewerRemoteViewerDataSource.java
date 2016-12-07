@@ -16,7 +16,8 @@ public interface CarsViewerRemoteViewerDataSource {
 
     @GET("http://api.wkda-test.com/v1/car-types/main-types")
     Observable<CarModel> loadMoreMainTypes(@Query("page") int page,
-                                              @Query("pageSize") int pageSize, @Query("manufacturer") String manufacture, @Query("wa_key") String waKey);
+                                           @Query("pageSize") int pageSize, @Query("manufacturer") String manufacture, @Query("wa_key") String waKey);
+
     @GET("v1/car-types/built-dates")
-    Observable<CarModel> getBuiltDates(@Query("manufacturer") String manufacture,@Query("main-type") String mainType , @Query("wa_key") String waKey);
+    Observable<CarModel> getBuiltDates(@Query("manufacturer") String manufacture, @Query("main-type") String mainType, @Query("wa_key") String waKey);
 }

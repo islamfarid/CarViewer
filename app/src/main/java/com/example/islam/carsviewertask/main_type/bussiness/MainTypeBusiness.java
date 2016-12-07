@@ -19,7 +19,8 @@ public class MainTypeBusiness {
     public MainTypeBusiness(CarsViewerRepository carsRepository) {
         mCarsRepository = carsRepository;
     }
-    public Observable<CarModel> loadMoreManufactures(int page, int pageSize,String manufacture ,String waKey) {
-        return mCarsRepository.loadMoreMainTypes(page,pageSize,manufacture,waKey);
+
+    public Observable<CarModel> loadMoreManufactures(int page, int pageSize, String manufacture, String waKey) {
+        return mCarsRepository.loadMoreMainTypes(page, pageSize, manufacture, waKey);
     }
 }

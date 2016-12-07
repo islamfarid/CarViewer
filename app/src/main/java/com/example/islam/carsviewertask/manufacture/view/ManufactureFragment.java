@@ -34,12 +34,12 @@ import static com.google.gson.internal.$Gson$Preconditions.checkNotNull;
  */
 
 public class ManufactureFragment extends Fragment implements ManufacturerContract.View {
+    private final int pageSize = 10;
     @Bind(R.id.manufactures_recyclerview)
     RecyclerView mManufacturesRecyclerView;
     @Bind(R.id.progressBar)
-    ProgressBar loadingBar;
+    ProgressBar mLoadingBar;
     private int currentPage = -1;
-    private final int pageSize = 10;
     private int totalPagesCount = -1;
     private ManufacturerContract.Presenter mPresenter;
     private ManufacturesAdapter manufacturesAdapter;
@@ -68,7 +68,7 @@ public class ManufactureFragment extends Fragment implements ManufacturerContrac
     @Override
     public void onResume() {
         super.onResume();
-        if(manufacturesAdapter != null){
+        if (manufacturesAdapter != null) {
             manufacturesAdapter.notifyDataSetChanged();
         }
     }
@@ -91,10 +91,10 @@ public class ManufactureFragment extends Fragment implements ManufacturerContrac
 
         manufacturesAdapter.setOnItemClickListener((view, position) ->
         {
-            Intent mainTypeIntent = new Intent(getActivity() , MainTypeActivity.class);
-            mainTypeIntent.putExtra(Constants.MANUFACTURE , manufacturesAdapter.getmManufactures().get(position));
+            Intent mainTypeIntent = new Intent(getActivity(), MainTypeActivity.class);
+            mainTypeIntent.putExtra(Constants.MANUFACTURE, manufacturesAdapter.getmManufactures().get(position));
             getActivity().startActivity(mainTypeIntent);
-           getActivity().  overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+            getActivity().overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
 
         });
     }
@@ -106,7 +106,7 @@ public class ManufactureFragment extends Fragment implements ManufacturerContrac
     }
 
     @Override
-    public void showManfuctures(CarModel carModel) {
+    public void showManufactures(CarModel carModel) {
         Set<String> keys = carModel.getCarData().keySet();
         ArrayList<KeyValue> keyValues = new ArrayList<>();
         for (String key : keys) {
@@ -119,7 +119,7 @@ public class ManufactureFragment extends Fragment implements ManufacturerContrac
 
     @Override
     public void showLoading() {
-        loadingBar.setVisibility(View.VISIBLE);
+        mLoadingBar.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -129,6 +129,12 @@ public class ManufactureFragment extends Fragment implements ManufacturerContrac
 
     @Override
     public void hideLoading() {
-        loadingBar.setVisibility(View.GONE);
+        mLoadingBar.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mPresenter.unsubscribe();
     }
 }

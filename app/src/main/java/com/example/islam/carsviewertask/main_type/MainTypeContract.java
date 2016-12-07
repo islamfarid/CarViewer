@@ -11,14 +11,17 @@ import com.example.islam.carsviewertask.data.models.CarModel;
 
 public interface MainTypeContract {
 
-    interface View extends BaseView<Presenter>{
-        void showManfuctures(CarModel carModel);
+    interface View extends BaseView<Presenter> {
+        void showMainTypes(CarModel carModel);
+
         void showLoading();
+
         void showErrorMessage(String errorMsg);
+
         void hideLoading();
     }
 
     interface Presenter extends BasePresenter {
-        void getMoreMainTypes(int page, int pageSize,String manufacture);
+        void getMoreMainTypes(int page, int pageSize, String manufacture);
     }
 }

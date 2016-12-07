@@ -33,11 +33,6 @@ public class MainTypePresenter implements MainTypeContract.Presenter {
 
 
     @Override
-    public void subscribe() {
-
-    }
-
-    @Override
     public void unsubscribe() {
         mSubscriptions.clear();
     }
@@ -57,16 +52,16 @@ public class MainTypePresenter implements MainTypeContract.Presenter {
     }
 
     @Override
-    public void getMoreMainTypes(int page, int pageSize,String manufacture) {
+    public void getMoreMainTypes(int page, int pageSize, String manufacture) {
         mManufactureView.showLoading();
         mSubscriptions.add(mMainTypeBusiness
-                .loadMoreManufactures(page, pageSize, manufacture,Constants.WK_KEY)
+                .loadMoreManufactures(page, pageSize, manufacture, Constants.WK_KEY)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         // onNext
                         carModel -> {
-                            mManufactureView.showManfuctures(carModel);
+                            mManufactureView.showMainTypes(carModel);
                         }, // onError
                         exception -> {
                             mManufactureView.showErrorMessage(exception.getMessage());

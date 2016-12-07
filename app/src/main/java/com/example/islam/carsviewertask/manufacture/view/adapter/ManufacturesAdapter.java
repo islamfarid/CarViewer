@@ -68,6 +68,9 @@ public class ManufacturesAdapter extends RecyclerView.Adapter {
         return mManufactures;
     }
 
+    public void addNewManufatures(ArrayList<KeyValue> mManufactures) {
+        this.mManufactures.addAll(mManufactures);
+    }
 
     class ManufactureItem extends RecyclerView.ViewHolder implements View.OnClickListener {
         @Bind(R.id.title_textview)
@@ -90,9 +93,5 @@ public class ManufacturesAdapter extends RecyclerView.Adapter {
                 selectedPosition = getLayoutPosition();
             }
         }
-    }
-
-    public void addNewManufatures(ArrayList<KeyValue> mManufactures) {
-        this.mManufactures.addAll(mManufactures);
     }
 }

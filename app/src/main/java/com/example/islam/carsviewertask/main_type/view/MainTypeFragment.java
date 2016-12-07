@@ -32,12 +32,12 @@ import static com.google.gson.internal.$Gson$Preconditions.checkNotNull;
  */
 
 public class MainTypeFragment extends Fragment implements MainTypeContract.View {
+    private final int pageSize = 10;
     @Bind(R.id.main_type_recyclerview)
     RecyclerView mMainTypeRecyclerView;
     @Bind(R.id.progressBar)
     ProgressBar loadingBar;
     private int currentPage = -1;
-    private final int pageSize = 10;
     private int totalPagesCount = -1;
     private MainTypeContract.Presenter mPresenter;
     private MainTypeAdapter mainTypeAdapter;
@@ -68,15 +68,15 @@ public class MainTypeFragment extends Fragment implements MainTypeContract.View 
     private void init() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         mMainTypeRecyclerView.setLayoutManager(linearLayoutManager);
-        mainTypeAdapter = new MainTypeAdapter(getActivity(), new ArrayList<>(),mManufactureKeyValue.getKey());
+        mainTypeAdapter = new MainTypeAdapter(getActivity(), new ArrayList<>(), mManufactureKeyValue.getKey());
         mMainTypeRecyclerView.setAdapter(mainTypeAdapter);
-        mPresenter.getMoreMainTypes(++currentPage, pageSize,mManufactureKeyValue.getKey());
+        mPresenter.getMoreMainTypes(++currentPage, pageSize, mManufactureKeyValue.getKey());
         mMainTypeRecyclerView.addOnScrollListener(new EndlessRecyclerOnScrollListener(linearLayoutManager) {
             @Override
             public void onLoadMore(int current_page) {
                 if (totalPagesCount < 0 || totalPagesCount > currentPage) {
                     showLoading();
-                    mPresenter.getMoreMainTypes(++currentPage, pageSize,mManufactureKeyValue.getKey());
+                    mPresenter.getMoreMainTypes(++currentPage, pageSize, mManufactureKeyValue.getKey());
                 }
             }
         });
@@ -89,14 +89,14 @@ public class MainTypeFragment extends Fragment implements MainTypeContract.View 
     }
 
     @Override
-    public void showManfuctures(CarModel carModel) {
+    public void showMainTypes(CarModel carModel) {
         Set<String> keys = carModel.getCarData().keySet();
         ArrayList<KeyValue> keyValues = new ArrayList<>();
         for (String key : keys) {
             keyValues.add(new KeyValue(key, carModel.getCarData().get(key)));
         }
         totalPagesCount = carModel.getTotalPageCount();
-        mainTypeAdapter.addNewManufatures(keyValues);
+        mainTypeAdapter.addNewMainTypes(keyValues);
         mainTypeAdapter.notifyDataSetChanged();
     }
 
@@ -113,5 +113,11 @@ public class MainTypeFragment extends Fragment implements MainTypeContract.View 
     @Override
     public void hideLoading() {
         loadingBar.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mPresenter.unsubscribe();
     }
 }

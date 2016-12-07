@@ -1,7 +1,6 @@
 package com.example.islam.carsviewertask.built_dates.dagger;
 
 
-
 import com.example.islam.carsviewertask.built_dates.BuildDataContract;
 
 import dagger.Module;

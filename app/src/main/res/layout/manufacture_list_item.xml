@@ -16,11 +16,11 @@
         android:paddingTop="@dimen/activity_vertical_margin">
 
         <TextView
-            android:textStyle="bold"
             android:id="@+id/title_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin" />
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/number_in_list_textview"

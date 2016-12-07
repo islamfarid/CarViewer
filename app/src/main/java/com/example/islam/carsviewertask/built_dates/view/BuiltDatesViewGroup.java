@@ -3,7 +3,6 @@ package com.example.islam.carsviewertask.built_dates.view;
 import android.app.Activity;
 import android.content.Context;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -20,7 +19,6 @@ import com.example.islam.carsviewertask.built_dates.dagger.DaggerBuiltDatesCompo
 import com.example.islam.carsviewertask.built_dates.presenter.BuiltDatesPresenter;
 import com.example.islam.carsviewertask.built_dates.view.adapter.BuiltDatesAdapter;
 import com.example.islam.carsviewertask.data.models.CarModel;
-import com.example.islam.carsviewertask.main_type.view.adapter.MainTypeAdapter;
 
 import java.util.ArrayList;
 
@@ -29,13 +27,11 @@ import javax.inject.Inject;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-import static com.google.gson.internal.$Gson$Preconditions.checkNotNull;
-
 /**
  * Created by islam on 04/12/16.
  */
 
-public class BuiltDatesViewGroup extends RelativeLayout implements BuildDataContract.View{
+public class BuiltDatesViewGroup extends RelativeLayout implements BuildDataContract.View {
 
     @Bind(R.id.built_dates_recyclerview)
     RecyclerView mBuiltDatesRecyclerView;
@@ -43,9 +39,9 @@ public class BuiltDatesViewGroup extends RelativeLayout implements BuildDataCont
     TextView mBuiltDatesTextView;
     @Bind(R.id.progressBar)
     ProgressBar mLoadingView;
-    private int columnNumbers = 3;
     @Inject
     BuiltDatesPresenter mPresenter;
+    private int columnNumbers = 3;
 
     public BuiltDatesViewGroup(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -54,8 +50,8 @@ public class BuiltDatesViewGroup extends RelativeLayout implements BuildDataCont
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.layout_built_dates, this, true);
         ButterKnife.bind(this, view);
-        DaggerBuiltDatesComponent.builder().carsViewersRepositoryComponent((((CarsViewerTaskApplication) ((Activity)getContext()).getApplication()).
-                        getCarsRepositoryComponent())).builtDatesModule(new BuiltDatesModule(this)).build().inject(this);
+        DaggerBuiltDatesComponent.builder().carsViewersRepositoryComponent((((CarsViewerTaskApplication) ((Activity) getContext()).getApplication()).
+                getCarsRepositoryComponent())).builtDatesModule(new BuiltDatesModule(this)).build().inject(this);
     }
 
     public BuiltDatesViewGroup(Context context) {
@@ -63,17 +59,16 @@ public class BuiltDatesViewGroup extends RelativeLayout implements BuildDataCont
     }
 
 
-    public void setBuiltDates(String manufacture , String mainType){
-        mPresenter.getBuiltDates(manufacture,mainType);
+    public void setBuiltDates(String manufacture, String mainType) {
+        mPresenter.getBuiltDates(manufacture, mainType);
     }
-
 
 
     @Override
     public void showBuiltDates(CarModel carModel) {
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(),columnNumbers);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), columnNumbers);
         mBuiltDatesRecyclerView.setLayoutManager(gridLayoutManager);
-      BuiltDatesAdapter builtDatesAdapter = new BuiltDatesAdapter(getContext(), new ArrayList<>(carModel.getCarData().keySet()));
+        BuiltDatesAdapter builtDatesAdapter = new BuiltDatesAdapter(getContext(), new ArrayList<>(carModel.getCarData().keySet()));
         mBuiltDatesRecyclerView.setAdapter(builtDatesAdapter);
     }
 
@@ -84,7 +79,7 @@ public class BuiltDatesViewGroup extends RelativeLayout implements BuildDataCont
 
     @Override
     public void showErrorMessage(String errorMsg) {
-       mBuiltDatesTextView.setText(errorMsg);
+        mBuiltDatesTextView.setText(errorMsg);
     }
 
     @Override

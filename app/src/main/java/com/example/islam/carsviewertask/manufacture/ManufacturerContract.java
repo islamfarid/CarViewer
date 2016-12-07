@@ -12,13 +12,16 @@ import com.example.islam.carsviewertask.data.models.CarModel;
 public interface ManufacturerContract {
 
     interface View extends BaseView<Presenter> {
-        void showManfuctures(CarModel carModel);
+        void showManufactures(CarModel carModel);
+
         void showLoading();
+
         void showErrorMessage(String errorMsg);
+
         void hideLoading();
     }
 
     interface Presenter extends BasePresenter {
-        void getMoreManufactures(int page,int pageSize);
+        void getMoreManufactures(int page, int pageSize);
     }
 }

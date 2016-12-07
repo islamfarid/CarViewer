@@ -8,11 +8,30 @@ import android.os.Parcelable;
  */
 
 public class KeyValue implements Parcelable {
+    public static final Parcelable.Creator<KeyValue> CREATOR = new Parcelable.Creator<KeyValue>() {
+        @Override
+        public KeyValue createFromParcel(Parcel source) {
+            return new KeyValue(source);
+        }
+
+        @Override
+        public KeyValue[] newArray(int size) {
+            return new KeyValue[size];
+        }
+    };
     private String key, value;
 
     public KeyValue(String key, String value) {
         this.key = key;
         this.value = value;
+    }
+
+    public KeyValue() {
+    }
+
+    protected KeyValue(Parcel in) {
+        this.key = in.readString();
+        this.value = in.readString();
     }
 
     public String getKey() {
@@ -41,24 +60,4 @@ public class KeyValue implements Parcelable {
         dest.writeString(this.key);
         dest.writeString(this.value);
     }
-
-    public KeyValue() {
-    }
-
-    protected KeyValue(Parcel in) {
-        this.key = in.readString();
-        this.value = in.readString();
-    }
-
-    public static final Parcelable.Creator<KeyValue> CREATOR = new Parcelable.Creator<KeyValue>() {
-        @Override
-        public KeyValue createFromParcel(Parcel source) {
-            return new KeyValue(source);
-        }
-
-        @Override
-        public KeyValue[] newArray(int size) {
-            return new KeyValue[size];
-        }
-    };
 }

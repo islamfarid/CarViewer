@@ -6,8 +6,6 @@ package com.example.islam.carsviewertask;
  */
 public interface BasePresenter {
 
-    void subscribe();
-
     void unsubscribe();
 
 }

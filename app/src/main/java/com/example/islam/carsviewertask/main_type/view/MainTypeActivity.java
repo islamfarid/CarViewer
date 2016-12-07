@@ -3,7 +3,6 @@ package com.example.islam.carsviewertask.main_type.view;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 
 import com.example.islam.carsviewertask.CarsViewerTaskApplication;
 import com.example.islam.carsviewertask.R;
@@ -27,7 +26,7 @@ public class MainTypeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_manufacture);
         MainTypeFragment mainTypeFragment =
                 (MainTypeFragment) getFragmentManager().findFragmentById(R.id.contentFrame);
-        setTitle(((KeyValue)getIntent().getExtras().getParcelable(Constants.MANUFACTURE)).getValue());
+        setTitle(((KeyValue) getIntent().getExtras().getParcelable(Constants.MANUFACTURE)).getValue());
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setDisplayShowHomeEnabled(true);
@@ -42,6 +41,7 @@ public class MainTypeActivity extends AppCompatActivity {
                 carsViewersRepositoryComponent(((CarsViewerTaskApplication) getApplication()).
                         getCarsRepositoryComponent()).mainTypeModule(new MainTypeModule(mainTypeFragment)).build().inject(this);
     }
+
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();
