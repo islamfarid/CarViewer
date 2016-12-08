@@ -20,7 +20,7 @@ public class MainTypeBusiness {
         mCarsRepository = carsRepository;
     }
 
-    public Observable<CarModel> loadMoreManufactures(int page, int pageSize, String manufacture, String waKey) {
+    public Observable<CarModel> loadMoreMainTypes(int page, int pageSize, String manufacture, String waKey) {
         return mCarsRepository.loadMoreMainTypes(page, pageSize, manufacture, waKey);
     }
 }

@@ -32,7 +32,6 @@ import static com.google.gson.internal.$Gson$Preconditions.checkNotNull;
  */
 
 public class MainTypeFragment extends Fragment implements MainTypeContract.View {
-    private final int pageSize = 10;
     @Bind(R.id.main_type_recyclerview)
     RecyclerView mMainTypeRecyclerView;
     @Bind(R.id.progressBar)
@@ -70,13 +69,13 @@ public class MainTypeFragment extends Fragment implements MainTypeContract.View 
         mMainTypeRecyclerView.setLayoutManager(linearLayoutManager);
         mainTypeAdapter = new MainTypeAdapter(getActivity(), new ArrayList<>(), mManufactureKeyValue.getKey());
         mMainTypeRecyclerView.setAdapter(mainTypeAdapter);
-        mPresenter.getMoreMainTypes(++currentPage, pageSize, mManufactureKeyValue.getKey());
+        mPresenter.getMoreMainTypes(++currentPage, Constants.pageSize, mManufactureKeyValue.getKey());
         mMainTypeRecyclerView.addOnScrollListener(new EndlessRecyclerOnScrollListener(linearLayoutManager) {
             @Override
             public void onLoadMore(int current_page) {
                 if (totalPagesCount < 0 || totalPagesCount > currentPage) {
                     showLoading();
-                    mPresenter.getMoreMainTypes(++currentPage, pageSize, mManufactureKeyValue.getKey());
+                    mPresenter.getMoreMainTypes(++currentPage, Constants.pageSize, mManufactureKeyValue.getKey());
                 }
             }
         });

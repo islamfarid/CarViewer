@@ -8,8 +8,8 @@ import com.example.islam.carsviewertask.data.models.CarModel;
  * Created by islam on 04/12/16.
  */
 
-public interface BuildDataContract {
-    interface View extends BaseView<BuildDataContract.Presenter> {
+public interface BuiltDataContract {
+    interface View extends BaseView<BuiltDataContract.Presenter> {
         void showBuiltDates(CarModel carModel);
 
         void showLoading();

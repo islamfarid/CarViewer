@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import com.example.islam.carsviewertask.common.Constants;
 import com.example.islam.carsviewertask.manufacture.ManufacturerContract;
 import com.example.islam.carsviewertask.manufacture.bussiness.ManufactureBusiness;
+import com.example.islam.carsviewertask.utils.EspressoIdlingResource;
 
 import javax.inject.Inject;
 
@@ -53,6 +54,7 @@ public class ManufacturePresenter implements ManufacturerContract.Presenter {
 
     @Override
     public void getMoreManufactures(int page, int pageSize) {
+        EspressoIdlingResource.increment();
         mManufactureView.showLoading();
         mSubscriptions.add(mManufactureBusiness
                 .loadMoreManufactures(page, pageSize, Constants.WK_KEY)
@@ -66,6 +68,11 @@ public class ManufacturePresenter implements ManufacturerContract.Presenter {
                         exception -> {
                             mManufactureView.showErrorMessage(exception.getMessage());
                         },//onComplete
-                        () -> mManufactureView.hideLoading()));
+                        () -> {
+                            mManufactureView.hideLoading();
+                            if (!EspressoIdlingResource.getIdlingResource().isIdleNow()) {
+                                EspressoIdlingResource.decrement(); // Set app as idle.
+                            }
+                        }));
     }
 }

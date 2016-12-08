@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 import com.example.islam.carsviewertask.CarsViewerTaskApplication;
 import com.example.islam.carsviewertask.R;
-import com.example.islam.carsviewertask.built_dates.BuildDataContract;
+import com.example.islam.carsviewertask.built_dates.BuiltDataContract;
 import com.example.islam.carsviewertask.built_dates.dagger.BuiltDatesModule;
 import com.example.islam.carsviewertask.built_dates.dagger.DaggerBuiltDatesComponent;
 import com.example.islam.carsviewertask.built_dates.presenter.BuiltDatesPresenter;
@@ -31,7 +31,7 @@ import butterknife.ButterKnife;
  * Created by islam on 04/12/16.
  */
 
-public class BuiltDatesViewGroup extends RelativeLayout implements BuildDataContract.View {
+public class BuiltDatesViewGroup extends RelativeLayout implements BuiltDataContract.View {
 
     @Bind(R.id.built_dates_recyclerview)
     RecyclerView mBuiltDatesRecyclerView;
@@ -88,7 +88,7 @@ public class BuiltDatesViewGroup extends RelativeLayout implements BuildDataCont
     }
 
     @Override
-    public void setPresenter(BuildDataContract.Presenter presenter) {
+    public void setPresenter(BuiltDataContract.Presenter presenter) {
         //do no thing because it will be a field injection
     }
 }

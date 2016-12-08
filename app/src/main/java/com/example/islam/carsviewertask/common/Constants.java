@@ -5,6 +5,8 @@ package com.example.islam.carsviewertask.common;
  */
 
 public class Constants {
+    public static final int pageSize = 10;
     public static String WK_KEY = "coding-puzzle-client-449cc9d";
     public static String MANUFACTURE = "manufacture";
+
 }

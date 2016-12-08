@@ -2,9 +2,10 @@ package com.example.islam.carsviewertask.built_dates.presenter;
 
 import android.support.annotation.NonNull;
 
-import com.example.islam.carsviewertask.built_dates.BuildDataContract;
+import com.example.islam.carsviewertask.built_dates.BuiltDataContract;
 import com.example.islam.carsviewertask.built_dates.bussiness.BuiltDatesBusiness;
 import com.example.islam.carsviewertask.common.Constants;
+import com.example.islam.carsviewertask.utils.EspressoIdlingResource;
 
 import javax.inject.Inject;
 
@@ -16,16 +17,16 @@ import rx.subscriptions.CompositeSubscription;
  * Created by islam on 04/12/16.
  */
 
-public class BuiltDatesPresenter implements BuildDataContract.Presenter {
+public class BuiltDatesPresenter implements BuiltDataContract.Presenter {
     @NonNull
-    private BuildDataContract.View mBuiltDatesView;
+    private BuiltDataContract.View mBuiltDatesView;
     @NonNull
     private BuiltDatesBusiness mBuiltDatesBusiness;
     @NonNull
     private CompositeSubscription mSubscriptions;
 
     @Inject
-    public BuiltDatesPresenter(BuildDataContract.View mBuiltDatesView) {
+    public BuiltDatesPresenter(BuiltDataContract.View mBuiltDatesView) {
         this.mBuiltDatesView = mBuiltDatesView;
         mSubscriptions = new CompositeSubscription();
     }
@@ -43,6 +44,7 @@ public class BuiltDatesPresenter implements BuildDataContract.Presenter {
 
     @Override
     public void getBuiltDates(String manufacture, String mainType) {
+        EspressoIdlingResource.increment();
         mBuiltDatesView.showLoading();
         mSubscriptions.add(mBuiltDatesBusiness
                 .getBuitDates(manufacture, mainType, Constants.WK_KEY)
@@ -56,6 +58,11 @@ public class BuiltDatesPresenter implements BuildDataContract.Presenter {
                         exception -> {
                             mBuiltDatesView.showErrorMessage(exception.getMessage());
                         },//onComplete
-                        () -> mBuiltDatesView.hideLoading()));
+                        () -> {
+                            mBuiltDatesView.hideLoading();
+                            if (!EspressoIdlingResource.getIdlingResource().isIdleNow()) {
+                                EspressoIdlingResource.decrement(); // Set app as idle.
+                            }
+                        }));
     }
 }

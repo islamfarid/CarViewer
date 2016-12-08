@@ -1,7 +1,7 @@
 package com.example.islam.carsviewertask.built_dates.dagger;
 
 
-import com.example.islam.carsviewertask.built_dates.BuildDataContract;
+import com.example.islam.carsviewertask.built_dates.BuiltDataContract;
 
 import dagger.Module;
 import dagger.Provides;
@@ -11,15 +11,15 @@ import dagger.Provides;
  */
 @Module
 public class BuiltDatesModule {
-    private final BuildDataContract.View mView;
+    private final BuiltDataContract.View mView;
 
 
-    public BuiltDatesModule(BuildDataContract.View view) {
+    public BuiltDatesModule(BuiltDataContract.View view) {
         this.mView = view;
     }
 
     @Provides
-    BuildDataContract.View provideManufactureView() {
+    BuiltDataContract.View provideManufactureView() {
         return mView;
     }
 

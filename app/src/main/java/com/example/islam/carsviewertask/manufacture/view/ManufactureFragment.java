@@ -34,7 +34,6 @@ import static com.google.gson.internal.$Gson$Preconditions.checkNotNull;
  */
 
 public class ManufactureFragment extends Fragment implements ManufacturerContract.View {
-    private final int pageSize = 10;
     @Bind(R.id.manufactures_recyclerview)
     RecyclerView mManufacturesRecyclerView;
     @Bind(R.id.progressBar)
@@ -78,13 +77,13 @@ public class ManufactureFragment extends Fragment implements ManufacturerContrac
         mManufacturesRecyclerView.setLayoutManager(linearLayoutManager);
         manufacturesAdapter = new ManufacturesAdapter(getActivity(), new ArrayList<>());
         mManufacturesRecyclerView.setAdapter(manufacturesAdapter);
-        mPresenter.getMoreManufactures(++currentPage, pageSize);
+        mPresenter.getMoreManufactures(++currentPage, Constants.pageSize);
         mManufacturesRecyclerView.addOnScrollListener(new EndlessRecyclerOnScrollListener(linearLayoutManager) {
             @Override
             public void onLoadMore(int current_page) {
                 if (totalPagesCount < 0 || totalPagesCount > currentPage) {
                     showLoading();
-                    mPresenter.getMoreManufactures(++currentPage, pageSize);
+                    mPresenter.getMoreManufactures(++currentPage, Constants.pageSize);
                 }
             }
         });
